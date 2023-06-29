@@ -18,7 +18,6 @@ const User =
 const HomePage = () => {
   return (
     <div className='HomeScreen'>
-      <VeriablePage/>
       <TimeOutPage/>
       <div className='HomeLeftScreen'>
       </div>
@@ -30,11 +29,7 @@ const HomePage = () => {
         <h1 className='WhiteTitle'>{User.title}</h1>
         <p className='WhiteDescription'>{User.description}</p>
         <OrangeButton/>
-        <div className='Test1'>
-          <div className='Test2'></div>
-          <div className='Test3'></div>
-          <div className='Test4'></div>
-        </div>
+        <VeriablePage/>
       </div>
     </div>
   )

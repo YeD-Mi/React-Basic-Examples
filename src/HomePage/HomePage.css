@@ -1,20 +1,3 @@
-.Test1 {
-  display:flex;
-  height: 20vh;
-  background-color: black;
-}
-.Test2{
-  flex: 2;
-  background-color: red;
-}
-.Test3 {
-  flex: 1;
-  background-color: palegreen;
-}
-.Test4 {
-  flex: 1;
-  background-color: purple;
-}
 .HomeScreen {
   display: flex;
   flex-direction: row;
@@ -24,7 +7,7 @@
 
 .HomeLeftScreen {
   position: fixed;
-  width: 50vh;
+  width: 25vw;
   height: 200vh;
   background-color: #ffb400;
   transform: rotate(-15deg);
@@ -38,7 +21,7 @@
   background-position: top;
   height: calc(100vh - 80px);
   z-index: 11;
-  margin-left: 20vh;
+  margin-left: 10vw;
   margin-top: 5vh;
   border-radius: 30px;
   box-shadow: 0 0 7px rgba(0,0,0,.9);
@@ -47,7 +30,7 @@
 .ProfilImage {
   height: calc(100vh - 80px);
   z-index: 11;
-  width: 55vh;
+  width: 25vw;
   border-radius: 30px;
 }
 .YellowTitle {
@@ -56,7 +39,7 @@
   position: relative;
   color: #ffb400;
   margin-top: 20vh;
-  margin-left: 40vh;
+  margin-left: 25vw;
 }
 .WhiteTitle {
   font-size: 51px;
@@ -64,7 +47,7 @@
   font-weight: 700;
   position: relative;
   color: white;
-  margin-left: 45vh;
+  margin-left: 20vw;
 }
 
 .WhiteDescription
@@ -74,8 +57,8 @@
   line-height: 30px;
   position: relative;
   color: white;
-  margin-left: 25vh;
-  margin-right: 18vh;
+  margin-left: 20vw;
+  margin-right: 10vw;
 }
 .OrangeButtonStyle
 {
@@ -85,7 +68,7 @@
   background-color: white;
   color: orange;
   font-weight: bold;
-  margin-left: 80vh;
+  margin-left: 45vw;
   margin-top: 5vh;
 }
 
