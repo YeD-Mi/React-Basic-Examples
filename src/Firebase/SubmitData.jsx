@@ -1,7 +1,7 @@
 import {useEffect,useState } from 'react'
 import {useRef} from 'react'
 import {firestore} from "./Firebase"
-import {collection,addDoc,getDocs,updateDoc,doc} from "@firebase/firestore" 
+import {collection,addDoc,getDocs,updateDoc,deleteDoc,doc} from "@firebase/firestore" 
 
 export default function SubmitData() {
     const [users,setUsers] = useState([]);
@@ -9,6 +9,10 @@ export default function SubmitData() {
     const emailRef = useRef();
     const ageRef = useRef();
     const ref = collection (firestore,"users");
+    const deleteUsers = async (id) => {
+        const userDoc = doc(firestore,"users",id)
+        await deleteDoc(userDoc)
+    }
     const updateUsers = async (id,userName,age) => 
     {
         const userDoc = doc (firestore,"users",id)
@@ -66,7 +70,7 @@ export default function SubmitData() {
                 </input>
             </div>
             <div>
-                 <button type="submit">Click</button>
+                 <button type="submit">Add</button>
             </div>
             </div>
         </form>
@@ -78,6 +82,7 @@ export default function SubmitData() {
                         <p style={{margin:'10px'}}>{user.email}</p>
                         <p style={{margin:'10px'}}>{user.age}</p>
                         <button onClick={() => {updateUsers(user.id,user.userName,user.age)}} style={{borderRadius:'10px'}}>Update</button>
+                        <button onClick={() => {deleteUsers(user.id)}} style={{borderRadius:'10px'}}>Delete</button>
                     </div>);
                  })}</p>
             </div>
