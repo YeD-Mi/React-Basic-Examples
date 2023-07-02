@@ -1,19 +1,34 @@
-import React from 'react'
-import { useRef } from 'react'
+import {useEffect,useState } from 'react'
+import {useRef} from 'react'
 import {firestore} from "./Firebase"
-import {addDoc,collection} from "@firebase/firestore" 
+import {collection,addDoc,getDocs,updateDoc,doc} from "@firebase/firestore" 
 
 export default function SubmitData() {
+    const [users,setUsers] = useState([]);
     const userRef = useRef();
     const emailRef = useRef();
+    const ageRef = useRef();
     const ref = collection (firestore,"users");
+    const updateUsers = async (id,userName,age) => 
+    {
+        const userDoc = doc (firestore,"users",id)
+        const newFields = {userName: userName + " Yeni",age:age+1}
+        await updateDoc (userDoc,newFields)
+    };
+    useEffect(() => {
+        const getUsers = async () => {
+          const data1 = await getDocs(ref);
+          setUsers(data1.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        };
+        getUsers();
+      }, [ref]);
 
     const handleSave = async(e) =>
     {
         e.preventDefault();
         console.log(userRef.current.value);
 
-        let data = {userName:userRef.current.value,email:emailRef.current.value};
+        let data = {userName:userRef.current.value,email:emailRef.current.value,age:Number(ageRef.current.value)};
 
         try{
             addDoc(ref,data);
@@ -44,10 +59,28 @@ export default function SubmitData() {
                 </input>
             </div>
             <div>
+                <label>
+                    Enter Age:
+                </label>
+                <input type="number" ref={ageRef}>
+                </input>
+            </div>
+            <div>
                  <button type="submit">Click</button>
             </div>
             </div>
         </form>
+        <div>
+            <p>{users.map((user) => {
+                    return(
+                    <div style={{display:'flex', alignItems:'center', justifyContent:'center',backgroundColor:'white',width:'30vw',marginLeft:'35vw',borderRadius:'10px',borderWidth:'2px',border:'solid'}}>
+                        <p style={{margin:'10px'}}>{user.userName}</p>
+                        <p style={{margin:'10px'}}>{user.email}</p>
+                        <p style={{margin:'10px'}}>{user.age}</p>
+                        <button onClick={() => {updateUsers(user.id,user.userName,user.age)}} style={{borderRadius:'10px'}}>Update</button>
+                    </div>);
+                 })}</p>
+            </div>
     </div>
   )
 }
